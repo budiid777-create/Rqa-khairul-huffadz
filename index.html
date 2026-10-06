@@ -7,41 +7,33 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-arabic { font-family: 'Amiri', serif; line-height: 2.2; }
         @media print {
-            body * {
-                visibility: hidden;
-            }
-            #areaCetakLaporan, #areaCetakLaporan * {
-                visibility: visible;
-            }
-            #areaCetakLaporan {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-            }
-            .no-print {
-                display: none !important;
-            }
+            body * { visibility: hidden; }
+            #areaCetakLaporan, #areaCetakLaporan * { visibility: visible; }
+            #areaCetakLaporan { position: absolute; left: 0; top: 0; width: 100%; }
+            .no-print { display: none !important; }
         }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
     <!-- Header & Login Status -->
-    <header class="bg-emerald-700 text-white shadow-md no-print">
+    <header class="bg-emerald-800 text-white shadow-md no-print">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-book-quran text-3xl"></i>
+                <i class="fa-solid fa-book-quran text-3xl text-amber-400"></i>
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold">RQA Khairul Hufaz</h1>
-                    <p class="text-xs text-emerald-100">rqakhairulhufaz.com</p>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-wide">RQA Khairul Hufaz</h1>
+                    <p class="text-xs text-emerald-200">rqakhairulhufaz.com</p>
                 </div>
             </div>
             <div id="userInfo" class="hidden flex items-center space-x-3">
-                <span id="userEmail" class="text-sm bg-emerald-800 px-3 py-1 rounded-full text-emerald-100"></span>
-                <button onclick="logout()" class="text-xs bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded font-medium transition">
+                <span id="userEmail" class="text-xs md:text-sm bg-emerald-900 px-3 py-1.5 rounded-full text-emerald-100 border border-emerald-700"></span>
+                <button onclick="logout()" class="text-xs bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded-lg font-medium transition shadow-sm">
                     <i class="fa-solid fa-right-from-bracket"></i> Keluar
                 </button>
             </div>
@@ -50,25 +42,25 @@
 
     <!-- Halaman Login -->
     <div id="loginScreen" class="flex-grow flex items-center justify-center p-4 no-print">
-        <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full border border-slate-100">
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full border border-slate-100">
             <div class="text-center mb-6">
                 <i class="fa-solid fa-house-chimney-window text-5xl text-emerald-600 mb-3"></i>
                 <h2 class="text-2xl font-bold text-slate-800">Selamat Datang</h2>
-                <p class="text-sm text-slate-500">Masuk ke Sistem Pengelolaan RQA Khairul Hufaz</p>
+                <p class="text-sm text-slate-500">Sistem Pengelolaan RQA Khairul Hufaz</p>
             </div>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Email Pengajar / Admin</label>
                     <input type="email" id="loginEmail" required placeholder="admin@rqakhairulhufaz.com" 
-                           class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                           class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Kata Sandi</label>
                     <input type="password" id="loginPassword" required placeholder="••••••••" 
-                           class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                           class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg shadow transition">
-                    Masuk
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl shadow-md transition">
+                    Masuk Aplikasi
                 </button>
             </form>
         </div>
@@ -78,41 +70,46 @@
     <main id="appScreen" class="hidden flex-grow max-w-6xl w-full mx-auto px-4 py-6">
 
         <!-- Banner Selamat Datang -->
-        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-2xl shadow-md mb-8 no-print">
+        <div class="bg-gradient-to-r from-emerald-800 to-teal-700 text-white p-6 rounded-2xl shadow-lg mb-8 no-print border border-emerald-700">
             <h2 class="text-2xl md:text-3xl font-bold mb-2">Selamat datang di Rumah Quran Khairul Hufaz</h2>
-            <p class="text-emerald-100 text-sm md:text-base">Sistem Pengelolaan Absensi, Rekap Perkembangan Santri, dan Laporan Orang Tua.</p>
+            <p class="text-emerald-100 text-sm md:text-base">Sistem Pengelolaan Absensi, Rekap Perkembangan Santri, dan Materi Dzikir Hisnul Muslim.</p>
         </div>
 
         <!-- Menu Ikon Navigasi (Tab Utama) -->
         <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8 no-print">
-            <button onclick="switchTab('absensi')" id="tab-absensi" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+            <button onclick="switchTab('absensi')" id="tab-absensi" class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-emerald-500 hover:shadow-md transition text-center flex flex-col items-center justify-center">
                 <i class="fa-solid fa-clipboard-user text-3xl text-emerald-600 mb-2"></i>
                 <span class="font-semibold text-xs md:text-sm text-slate-700">Absensi</span>
             </button>
-            <button onclick="switchTab('perkembangan')" id="tab-perkembangan" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+            <button onclick="switchTab('perkembangan')" id="tab-perkembangan" class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-teal-500 hover:shadow-md transition text-center flex flex-col items-center justify-center">
                 <i class="fa-solid fa-chart-line text-3xl text-teal-600 mb-2"></i>
                 <span class="font-semibold text-xs md:text-sm text-slate-700">Input Capaian</span>
             </button>
-            <button onclick="switchTab('laporan')" id="tab-laporan" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+            <button onclick="switchTab('laporan')" id="tab-laporan" class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-500 hover:shadow-md transition text-center flex flex-col items-center justify-center">
                 <i class="fa-solid fa-file-invoice text-3xl text-indigo-600 mb-2"></i>
                 <span class="font-semibold text-xs md:text-sm text-slate-700">Rekap Laporan</span>
             </button>
-            <button onclick="switchTab('materi')" id="tab-materi" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+            <button onclick="switchTab('materi')" id="tab-materi" class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-amber-500 hover:shadow-md transition text-center flex flex-col items-center justify-center">
                 <i class="fa-solid fa-book-open text-3xl text-amber-600 mb-2"></i>
-                <span class="font-semibold text-xs md:text-sm text-slate-700">Materi Belajar</span>
+                <span class="font-semibold text-xs md:text-sm text-slate-700">Materi Hisnul Muslim</span>
             </button>
-            <button onclick="switchTab('santri')" id="tab-santri" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+            <button onclick="switchTab('santri')" id="tab-santri" class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-blue-500 hover:shadow-md transition text-center flex flex-col items-center justify-center">
                 <i class="fa-solid fa-address-book text-3xl text-blue-600 mb-2"></i>
                 <span class="font-semibold text-xs md:text-sm text-slate-700">Daftar Santri</span>
             </button>
         </div>
 
-        <!-- SEKSI 1: ABSENSI -->
+        <!-- SEKSI 1: ABSENSI DENGAN FITUR PILIH TANGGAL -->
         <section id="content-absensi" class="tab-content bg-white p-6 rounded-2xl shadow-sm border mb-6 no-print">
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b pb-4">
                 <div>
                     <h3 class="text-lg font-bold text-slate-800">Absensi Kehadiran Santri</h3>
-                    <p class="text-sm text-slate-500" id="tanggalHariIni"></p>
+                    <p class="text-xs text-slate-500">Pilih tanggal untuk mencatat atau mengubah absensi hari ini/sebelumnya.</p>
+                </div>
+                <div class="flex items-center space-x-2 bg-slate-100 p-2 rounded-xl border">
+                    <i class="fa-solid fa-calendar-day text-emerald-600 text-lg ml-1"></i>
+                    <span class="text-xs font-semibold text-slate-600">Tanggal Absen:</span>
+                    <input type="date" id="pilihTglAbsensi" onchange="renderTabelAbsensi()" class="bg-white border rounded-lg px-2 py-1 text-sm font-bold text-emerald-800 focus:outline-none">
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -131,30 +128,41 @@
             </div>
         </section>
 
-        <!-- SEKSI 2: PERKEMBANGAN SANTRI -->
+        <!-- SEKSI 2: PERKEMBANGAN SANTRI DENGAN FITUR PILIH TANGGAL -->
         <section id="content-perkembangan" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6 no-print">
-            <h3 class="text-lg font-bold text-slate-800 mb-4">Input Capaian & Hasil Belajar Santri</h3>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800">Input Capaian & Hasil Belajar Santri</h3>
+                    <p class="text-xs text-slate-500">Pilih tanggal dan nama santri untuk mencatat/memperbarui setoran.</p>
+                </div>
+                <div class="flex items-center space-x-2 bg-slate-100 p-2 rounded-xl border">
+                    <i class="fa-solid fa-calendar-week text-teal-600 text-lg ml-1"></i>
+                    <span class="text-xs font-semibold text-slate-600">Tanggal Capaian:</span>
+                    <input type="date" id="pilihTglPerkembangan" onchange="loadPerkembanganSantri()" class="bg-white border rounded-lg px-2 py-1 text-sm font-bold text-teal-800 focus:outline-none">
+                </div>
+            </div>
+
             <div class="mb-6">
                 <label class="block text-sm font-medium text-slate-700 mb-2">Pilih Nama Santri:</label>
-                <select id="selectSantriPerkembangan" onchange="loadPerkembanganSantri()" class="w-full md:w-1/2 p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                <select id="selectSantriPerkembangan" onchange="loadPerkembanganSantri()" class="w-full md:w-1/2 p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500">
                     <!-- Option diisi JS -->
                 </select>
             </div>
-            <div id="detailPerkembangan" class="bg-slate-50 p-6 rounded-xl border space-y-4">
+            <div id="detailPerkembangan" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-1"><i class="fa-solid fa-book-bookmark text-emerald-600 mr-2"></i>Capaian Tilawah</label>
-                    <textarea id="inputTilawah" rows="2" class="w-full p-2 border rounded-lg text-sm" placeholder="Contoh: Iqro huruf ya / QS. Al-Baqarah ayat 1-15"></textarea>
+                    <textarea id="inputTilawah" rows="2" class="w-full p-2.5 border rounded-xl text-sm" placeholder="Contoh: Iqro huruf ya / QS. Al-Baqarah ayat 1-15"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-1"><i class="fa-solid fa-brain text-teal-600 mr-2"></i>Capaian Hafalan</label>
-                    <textarea id="inputHafalan" rows="2" class="w-full p-2 border rounded-lg text-sm" placeholder="Contoh: Surah Al-Fil / An-Naba'"></textarea>
+                    <textarea id="inputHafalan" rows="2" class="w-full p-2.5 border rounded-xl text-sm" placeholder="Contoh: Surah Al-Fil / An-Naba'"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-1"><i class="fa-solid fa-pen-nib text-amber-600 mr-2"></i>Catatan / Evaluasi Pengajar</label>
-                    <textarea id="inputKeteranganPerkembangan" rows="2" class="w-full p-2 border rounded-lg text-sm" placeholder="Contoh: Alhamdulillah lebih baik / Kelancaran hafalan meningkat."></textarea>
+                    <textarea id="inputKeteranganPerkembangan" rows="2" class="w-full p-2.5 border rounded-xl text-sm" placeholder="Contoh: Alhamdulillah lebih baik / Kelancaran hafalan meningkat."></textarea>
                 </div>
-                <button onclick="simpanPerkembangan()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition">
-                    Simpan Perubahan
+                <button onclick="simpanPerkembangan()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition shadow-sm">
+                    Simpan Capaian Tanggal Ini
                 </button>
             </div>
         </section>
@@ -167,29 +175,29 @@
             <div class="grid md:grid-cols-3 gap-4 mb-6 no-print">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Pilih Santri:</label>
-                    <select id="selectSantriLaporan" onchange="generatePratinjauLaporan()" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                    <select id="selectSantriLaporan" onchange="generatePratinjauLaporan()" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500">
                         <!-- Option diisi JS -->
                     </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Dari Tanggal:</label>
-                    <input type="text" id="inputTglAwal" oninput="generatePratinjauLaporan()" value="1" placeholder="Contoh: 1" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500 font-semibold text-emerald-800">
+                    <input type="text" id="inputTglAwal" oninput="generatePratinjauLaporan()" value="1" placeholder="Contoh: 1" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500 font-semibold text-emerald-800">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Sampai Tanggal:</label>
-                    <input type="text" id="inputTglAkhir" oninput="generatePratinjauLaporan()" value="7" placeholder="Contoh: 7" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500 font-semibold text-emerald-800">
+                    <input type="text" id="inputTglAkhir" oninput="generatePratinjauLaporan()" value="7" placeholder="Contoh: 7" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500 font-semibold text-emerald-800">
                 </div>
             </div>
 
             <!-- Pratinjau Tampilan Cetak Rapot -->
-            <div id="areaCetakLaporan" class="border p-6 rounded-xl bg-white shadow-sm">
-                <div class="border-b-2 border-emerald-700 pb-4 mb-4 text-center">
-                    <h2 class="text-2xl font-bold text-emerald-800 uppercase">Rumah Quran Khairul Hufaz</h2>
+            <div id="areaCetakLaporan" class="border p-6 rounded-2xl bg-white shadow-sm">
+                <div class="border-b-2 border-emerald-800 pb-4 mb-4 text-center">
+                    <h2 class="text-2xl font-bold text-emerald-800 uppercase tracking-wide">Rumah Quran Khairul Hufaz</h2>
                     <p class="text-xs font-semibold text-slate-600">LAPORAN HASIL BELAJAR SANTRI</p>
                     <p class="text-xs font-bold text-emerald-700 mt-1" id="lapPeriodeText">Periode: Tanggal 1 - 7</p>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 text-sm mb-6 bg-slate-50 p-4 rounded-lg">
+                <div class="grid grid-cols-2 gap-4 text-sm mb-6 bg-slate-50 p-4 rounded-xl border border-slate-100">
                     <div>
                         <p><span class="font-semibold text-slate-600">Nama Santri:</span> <span id="lapNama" class="font-bold text-slate-800"></span></p>
                         <p><span class="font-semibold text-slate-600">No. HP Orang Tua:</span> <span id="lapHpOrtu"></span></p>
@@ -200,15 +208,15 @@
                 </div>
 
                 <div class="space-y-4 text-sm">
-                    <div class="border p-3 rounded-lg">
+                    <div class="border p-3.5 rounded-xl">
                         <h4 class="font-bold text-emerald-700 mb-1"><i class="fa-solid fa-book-open mr-2"></i>Capaian Tilawah</h4>
-                        <p id="lapTilawah" class="text-slate-700 italic bg-emerald-50 p-2 rounded border border-emerald-100"></p>
+                        <p id="lapTilawah" class="text-slate-700 italic bg-emerald-50 p-2.5 rounded-lg border border-emerald-100"></p>
                     </div>
-                    <div class="border p-3 rounded-lg">
+                    <div class="border p-3.5 rounded-xl">
                         <h4 class="font-bold text-teal-700 mb-1"><i class="fa-solid fa-brain mr-2"></i>Capaian Hafalan</h4>
-                        <p id="lapHafalan" class="text-slate-700 italic bg-teal-50 p-2 rounded border border-teal-100"></p>
+                        <p id="lapHafalan" class="text-slate-700 italic bg-teal-50 p-2.5 rounded-lg border border-teal-100"></p>
                     </div>
-                    <div class="border p-3 rounded-lg">
+                    <div class="border p-3.5 rounded-xl">
                         <h4 class="font-bold text-indigo-700 mb-1"><i class="fa-solid fa-note-sticky mr-2"></i>Catatan & Evaluasi Pengajar</h4>
                         <p id="lapCatatan" class="text-slate-700"></p>
                     </div>
@@ -217,34 +225,46 @@
                 <div class="mt-8 pt-6 border-t flex justify-between text-xs text-slate-500">
                     <div>
                         <p>Mengetahui,</p>
-                        <p class="font-semibold mt-8 text-slate-700">Orang Tua / Wali Santri</p>
+                        <p class="font-semibold mt-10 text-slate-700">Orang Tua / Wali Santri</p>
                     </div>
                     <div class="text-right">
                         <p>Pengajar RQA Khairul Hufaz,</p>
-                        <p class="font-semibold mt-8 text-slate-700">Ust/Ustazah</p>
+                        <p class="font-semibold mt-10 text-slate-700">Ust/Ustazah</p>
                     </div>
                 </div>
             </div>
 
             <!-- Tombol Aksi (WA & Cetak) -->
             <div class="mt-6 flex flex-wrap gap-3 no-print">
-                <button onclick="kirimLaporanWA()" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium text-sm flex items-center space-x-2 shadow transition">
+                <button onclick="kirimLaporanWA()" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm flex items-center space-x-2 shadow-sm transition">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
                     <span>Kirim Laporan via WhatsApp</span>
                 </button>
-                <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium text-sm flex items-center space-x-2 shadow transition">
+                <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl font-medium text-sm flex items-center space-x-2 shadow-sm transition">
                     <i class="fa-solid fa-print text-lg"></i>
                     <span>Cetak Rapot / Simpan PDF</span>
                 </button>
             </div>
         </section>
 
-        <!-- SEKSI 4: MATERI BELAJAR -->
+        <!-- SEKSI 4: MATERI BELAJAR ELEGAN (HISNUL MUSLIM) -->
         <section id="content-materi" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6 no-print">
-            <h3 class="text-lg font-bold text-slate-800 mb-2">Materi Belajar (Doa Harian Hisnul Muslim)</h3>
-            <p class="text-sm text-slate-500 mb-6">Kumpulan doa-doa pilihan untuk hafalan dan amalan harian santri.</p>
-            <div class="grid md:grid-cols-2 gap-4" id="daftarMateriDoa">
-                <!-- Data Doa diisi lewat JS -->
+            <div class="border-b pb-4 mb-6">
+                <h3 class="text-xl font-bold text-emerald-800 flex items-center">
+                    <i class="fa-solid fa-book-quran text-amber-500 mr-2 text-2xl"></i>
+                    Hisnul Muslim - Dzikir & Doa Harian
+                </h3>
+                <p class="text-xs text-slate-500 mt-1">Kumpulan dzikir harian shahih karya Dr. Sa'id bin Wahf Al-Qohthoni untuk hafalan & amalan santri.</p>
+            </div>
+
+            <!-- Cari Doa -->
+            <div class="mb-6">
+                <input type="text" id="cariMateri" onkeyup="filterMateriDoa()" placeholder="🔍 Cari judul doa atau dzikir..." class="w-full md:w-1/2 p-3 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+            </div>
+
+            <!-- Container Kartu Doa Elegan -->
+            <div class="grid md:grid-cols-2 gap-6" id="daftarMateriDoa">
+                <!-- Data Doa Hisnul Muslim diisi lewat JS -->
             </div>
         </section>
 
@@ -255,7 +275,7 @@
                     <h3 class="text-lg font-bold text-slate-800">Daftar Data Santri</h3>
                     <p class="text-sm text-slate-500">Kelola informasi nama dan kontak orang tua santri.</p>
                 </div>
-                <button onclick="bukaModalSantri()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2">
+                <button onclick="bukaModalSantri()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center space-x-2 shadow-sm">
                     <i class="fa-solid fa-plus"></i>
                     <span>Tambah Santri Baru</span>
                 </button>
@@ -281,7 +301,7 @@
 
     <!-- Modal Tambah/Edit Santri -->
     <div id="modalSantri" class="fixed inset-0 bg-slate-900/50 hidden flex items-center justify-center p-4 z-50 no-print">
-        <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 space-y-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
                 <h3 id="modalTitle" class="text-lg font-bold text-slate-800">Tambah Santri Baru</h3>
                 <button onclick="tutupModalSantri()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -290,15 +310,15 @@
                 <input type="hidden" id="editIndex">
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap</label>
-                    <input type="text" id="inputNama" required class="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500">
+                    <input type="text" id="inputNama" required class="w-full p-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">No. HP Orang Tua (Format 08/62)</label>
-                    <input type="tel" id="inputHpOrtu" required placeholder="08123456789" class="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500">
+                    <input type="tel" id="inputHpOrtu" required placeholder="08123456789" class="w-full p-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
                 </div>
                 <div class="flex justify-end space-x-2 pt-3">
-                    <button type="button" onclick="tutupModalSantri()" class="px-4 py-2 border rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium">Simpan</button>
+                    <button type="button" onclick="tutupModalSantri()" class="px-4 py-2 border rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium">Simpan</button>
                 </div>
             </form>
         </div>
@@ -319,22 +339,24 @@
 
         let listSantri = JSON.parse(localStorage.getItem('rqa_santri')) || initialSantri.map(nama => ({
             nama: nama,
-            hpOrtu: "",
-            tilawah: "-",
-            hafalan: "-",
-            ketPerkembangan: "-"
+            hpOrtu: ""
         }));
 
-        let dataAbsensi = JSON.parse(localStorage.getItem('rqa_absensi')) || {};
+        // Struktur data berbasis tanggal: { "2026-10-07": { indexSantri: { status: 'Hadir', ket: '' } } }
+        let dbAbsensi = JSON.parse(localStorage.getItem('rqa_db_absensi')) || {};
+        // Struktur data capaian: { "2026-10-07": { indexSantri: { tilawah: '', hafalan: '', ket: '' } } }
+        let dbPerkembangan = JSON.parse(localStorage.getItem('rqa_db_perkembangan')) || {};
 
         window.onload = function() {
-            const todayStr = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('tanggalHariIni').innerText = todayStr;
+            const todayISO = new Date().toISOString().split('T')[0];
+            document.getElementById('pilihTglAbsensi').value = todayISO;
+            document.getElementById('pilihTglPerkembangan').value = todayISO;
+
             renderTabelAbsensi();
             renderTabelDataSantri();
             initSelectPerkembangan();
             initSelectLaporan();
-            renderMateriDoa();
+            renderMateriHisnulMuslim();
             
             const loggedInUser = localStorage.getItem('rqa_user');
             if(loggedInUser) {
@@ -372,13 +394,16 @@
             }
         }
 
-        // --- SEKSI 1: ABSENSI ---
+        // --- SEKSI 1: ABSENSI BERBASIS TANGGAL ---
         function renderTabelAbsensi() {
+            const tgl = document.getElementById('pilihTglAbsensi').value;
+            const dataHariIni = dbAbsensi[tgl] || {};
             const tbody = document.getElementById('tabelAbsensi');
             tbody.innerHTML = '';
+
             listSantri.forEach((santri, index) => {
-                const status = dataAbsensi[index]?.status || 'Belum Absen';
-                const ket = dataAbsensi[index]?.ket || '';
+                const status = dataHariIni[index]?.status || 'Belum Absen';
+                const ket = dataHariIni[index]?.ket || '';
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50">
@@ -386,7 +411,7 @@
                         <td class="p-3">
                             <div class="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-1 space-x-1">
                                 ${['Hadir', 'Izin', 'Sakit', 'Alfa'].map(st => `
-                                    <button onclick="setAbsen(${index}, '${st}')" 
+                                    <button onclick="setAbsen('${tgl}', ${index}, '${st}')" 
                                         class="px-2.5 py-1 text-xs font-semibold rounded-md transition ${status === st ? getBadgeClass(st) : 'text-slate-600 hover:bg-slate-200'}">
                                         ${st}
                                     </button>
@@ -394,7 +419,7 @@
                             </div>
                         </td>
                         <td class="p-3">
-                            <input type="text" value="${ket}" onchange="setKetAbsen(${index}, this.value)" placeholder="Keterangan singkat..." class="w-full p-1.5 border rounded text-xs">
+                            <input type="text" value="${ket}" onchange="setKetAbsen('${tgl}', ${index}, this.value)" placeholder="Keterangan..." class="w-full p-1.5 border rounded text-xs">
                         </td>
                     </tr>
                 `;
@@ -409,20 +434,22 @@
             return 'bg-slate-200 text-slate-700';
         }
 
-        function setAbsen(index, status) {
-            if(!dataAbsensi[index]) dataAbsensi[index] = {};
-            dataAbsensi[index].status = status;
-            localStorage.setItem('rqa_absensi', JSON.stringify(dataAbsensi));
+        function setAbsen(tgl, index, status) {
+            if(!dbAbsensi[tgl]) dbAbsensi[tgl] = {};
+            if(!dbAbsensi[tgl][index]) dbAbsensi[tgl][index] = {};
+            dbAbsensi[tgl][index].status = status;
+            localStorage.setItem('rqa_db_absensi', JSON.stringify(dbAbsensi));
             renderTabelAbsensi();
         }
 
-        function setKetAbsen(index, ket) {
-            if(!dataAbsensi[index]) dataAbsensi[index] = {};
-            dataAbsensi[index].ket = ket;
-            localStorage.setItem('rqa_absensi', JSON.stringify(dataAbsensi));
+        function setKetAbsen(tgl, index, ket) {
+            if(!dbAbsensi[tgl]) dbAbsensi[tgl] = {};
+            if(!dbAbsensi[tgl][index]) dbAbsensi[tgl][index] = {};
+            dbAbsensi[tgl][index].ket = ket;
+            localStorage.setItem('rqa_db_absensi', JSON.stringify(dbAbsensi));
         }
 
-        // --- SEKSI 2: PERKEMBANGAN SANTRI ---
+        // --- SEKSI 2: PERKEMBANGAN SANTRI BERBASIS TANGGAL ---
         function initSelectPerkembangan() {
             const select = document.getElementById('selectSantriPerkembangan');
             select.innerHTML = listSantri.map((s, idx) => `<option value="${idx}">${s.nama}</option>`).join('');
@@ -430,26 +457,31 @@
         }
 
         function loadPerkembanganSantri() {
+            const tgl = document.getElementById('pilihTglPerkembangan').value;
             const idx = document.getElementById('selectSantriPerkembangan').value;
-            const santri = listSantri[idx];
-            if(santri) {
-                document.getElementById('inputTilawah').value = santri.tilawah || '';
-                document.getElementById('inputHafalan').value = santri.hafalan || '';
-                document.getElementById('inputKeteranganPerkembangan').value = santri.ketPerkembangan || '';
-            }
+            const dataTgl = dbPerkembangan[tgl]?.[idx] || {};
+
+            document.getElementById('inputTilawah').value = dataTgl.tilawah || '';
+            document.getElementById('inputHafalan').value = dataTgl.hafalan || '';
+            document.getElementById('inputKeteranganPerkembangan').value = dataTgl.ket || '';
         }
 
         function simpanPerkembangan() {
+            const tgl = document.getElementById('pilihTglPerkembangan').value;
             const idx = document.getElementById('selectSantriPerkembangan').value;
-            listSantri[idx].tilawah = document.getElementById('inputTilawah').value;
-            listSantri[idx].hafalan = document.getElementById('inputHafalan').value;
-            listSantri[idx].ketPerkembangan = document.getElementById('inputKeteranganPerkembangan').value;
-            
-            localStorage.setItem('rqa_santri', JSON.stringify(listSantri));
-            alert('Capaian belajar ' + listSantri[idx].nama + ' berhasil disimpan!');
+
+            if(!dbPerkembangan[tgl]) dbPerkembangan[tgl] = {};
+            dbPerkembangan[tgl][idx] = {
+                tilawah: document.getElementById('inputTilawah').value,
+                hafalan: document.getElementById('inputHafalan').value,
+                ket: document.getElementById('inputKeteranganPerkembangan').value
+            };
+
+            localStorage.setItem('rqa_db_perkembangan', JSON.stringify(dbPerkembangan));
+            alert('Capaian belajar ' + listSantri[idx].nama + ' untuk tanggal ' + tgl + ' berhasil disimpan!');
         }
 
-        // --- SEKSI 3: REKAP & LAPORAN KE ORANG TUA ---
+        // --- SEKSI 3: REKAP LAPORAN PEKANAN ---
         function initSelectLaporan() {
             const select = document.getElementById('selectSantriLaporan');
             select.innerHTML = listSantri.map((s, idx) => `<option value="${idx}">${s.nama}</option>`).join('');
@@ -464,16 +496,26 @@
             const tglAkhir = document.getElementById('inputTglAkhir').value || '7';
             const periodeText = `Tanggal ${tglAwal} - ${tglAkhir}`;
 
-            const statusAbsen = dataAbsensi[idx]?.status || 'Hadir Lengkap';
-            const ketAbsen = dataAbsensi[idx]?.ket ? ` (${dataAbsensi[idx].ket})` : '';
+            // Ambil data terbaru dari dbPerkembangan
+            let tilawahTerakhir = "-", hafalanTerakhir = "-", ketTerakhir = "-";
+            const keysTgl = Object.keys(dbPerkembangan).sort();
+            if(keysTgl.length > 0) {
+                const tglTerakhir = keysTgl[keysTgl.length - 1];
+                const d = dbPerkembangan[tglTerakhir]?.[idx];
+                if(d) {
+                    tilawahTerakhir = d.tilawah || "-";
+                    hafalanTerakhir = d.hafalan || "-";
+                    ketTerakhir = d.ket || "-";
+                }
+            }
 
             document.getElementById('lapPeriodeText').innerText = 'Periode: ' + periodeText;
             document.getElementById('lapNama').innerText = santri.nama;
             document.getElementById('lapHpOrtu').innerText = santri.hpOrtu || '-';
-            document.getElementById('lapAbsen').innerText = statusAbsen + ketAbsen;
-            document.getElementById('lapTilawah').innerText = santri.tilawah || 'Belum ada catatan';
-            document.getElementById('lapHafalan').innerText = santri.hafalan || 'Belum ada catatan';
-            document.getElementById('lapCatatan').innerText = santri.ketPerkembangan || 'Alhamdulillah berjalan lancar.';
+            document.getElementById('lapAbsen').innerText = 'Hadir Lengkap';
+            document.getElementById('lapTilawah').innerText = tilawahTerakhir;
+            document.getElementById('lapHafalan').innerText = hafalanTerakhir;
+            document.getElementById('lapCatatan').innerText = ketTerakhir !== '-' ? ketTerakhir : 'Alhamdulillah berjalan lancar.';
         }
 
         function kirimLaporanWA() {
@@ -495,8 +537,17 @@
             const tglAkhir = document.getElementById('inputTglAkhir').value || '7';
             const periodeText = `Tanggal ${tglAwal}-${tglAkhir}`;
 
-            const statusAbsen = dataAbsensi[idx]?.status || 'Hadir Lengkap';
-            const ketAbsen = dataAbsensi[idx]?.ket ? ` (${dataAbsensi[idx].ket})` : '';
+            let tilawahTerakhir = "-", hafalanTerakhir = "-", ketTerakhir = "-";
+            const keysTgl = Object.keys(dbPerkembangan).sort();
+            if(keysTgl.length > 0) {
+                const tglTerakhir = keysTgl[keysTgl.length - 1];
+                const d = dbPerkembangan[tglTerakhir]?.[idx];
+                if(d) {
+                    tilawahTerakhir = d.tilawah || "-";
+                    hafalanTerakhir = d.hafalan || "-";
+                    ketTerakhir = d.ket || "-";
+                }
+            }
 
             const pesan = 
 `Assalamu'alaikum Warahmatullahi Wabarakatuh.
@@ -507,10 +558,10 @@
 📅 *Periode:* ${periodeText}
 👤 *Nama Santri:* ${santri.nama}
 
-📌 *Kehadiran Pekan Ini:* ${statusAbsen}${ketAbsen}
-📖 *Capaian Tilawah:* ${santri.tilawah || '-'}
-🧠 *Capaian Hafalan:* ${santri.hafalan || '-'}
-📝 *Evaluasi Pengajar:* ${santri.ketPerkembangan || 'Alhamdulillah berjalan lancar.'}
+📌 *Kehadiran Pekan Ini:* Hadir Lengkap
+📖 *Capaian Tilawah:* ${tilawahTerakhir}
+🧠 *Capaian Hafalan:* ${hafalanTerakhir}
+📝 *Evaluasi Pengajar:* ${ketTerakhir !== '-' ? ketTerakhir : 'Alhamdulillah berjalan lancar.'}
 
 Jazakumullah Khairan atas perhatian dan kerja sama Bapak/Ibu Orang Tua Santri.
 
@@ -520,23 +571,115 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`;
             window.open(url, '_blank');
         }
 
-        // --- SEKSI 4: MATERI BELAJAR ---
-        function renderMateriDoa() {
-            const doas = [
-                { judul: "Doa Sebelum Tidur", arab: "Bismika allaahumma amuutu wa ahyaa.", arti: "Dengan nama-Mu ya Allah, aku mati dan aku hidup." },
-                { judul: "Doa Bangun Tidur", arab: "Alhamdu lillaahilladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur.", arti: "Segala puji bagi Allah yang menghidupkan kami setelah mematikan kami, dan kepada-Nya kami dibangkitkan." },
-                { judul: "Doa Sebelum Makan", arab: "Bismillaah.", arti: "Dengan nama Allah." },
-                { judul: "Doa Masuk Masjid", arab: "Allaahummafftah lii abwaaba rahmatik.", arti: "Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu." }
-            ];
+        // --- SEKSI 4: MATERI HISNUL MUSLIM ---
+        const hisnulMuslimData = [
+            {
+                no: 1,
+                judul: "Dzikir Ketika Bangun Tidur",
+                arab: "اَلْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ",
+                latin: "Alhamdu lillaahilladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur.",
+                arti: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami, dan kepada-Nya lah kami akan dibangkitkan.",
+                riwayat: "HR. Al-Bukhori no. 6314 & Muslim no. 2711"
+            },
+            {
+                no: 2,
+                judul: "Doa Memakai Pakaian",
+                arab: "الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هُذَا (الثَّوْبَ) وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ",
+                latin: "Alhamdu lillaahilladzii kasaanii haadzat-tsauba wa razaqaniihi min ghairi haulin minnii wa laa quwwah.",
+                arti: "Segala puji bagi Allah yang telah memberiku pakaian ini dan menganugerahkannya kepadaku tanpa daya dan kekuatan dariku.",
+                riwayat: "HR. Abu Dawud no. 4023"
+            },
+            {
+                no: 3,
+                judul: "Doa Masuk WC",
+                arab: "بِسْمِ اللَّهِ ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+                latin: "Bismillaah, Allaahumma innii a'uudzu bika minal khubutsi wal khabaa'its.",
+                arti: "Dengan menyebut nama Allah, ya Allah, sesungguhnya aku berlindung kepada-Mu dari setan jantan dan setan betina.",
+                riwayat: "HR. Al-Bukhori no. 142 & Muslim no. 375"
+            },
+            {
+                no: 4,
+                judul: "Dzikir Setelah Selesai Wudhu",
+                arab: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+                latin: "Asyhadu allaa ilaaha illallaahu wahdahu laa syariika lah, wa asyhadu anna Muhammadan 'abduhu wa rasuuluh.",
+                arti: "Aku bersaksi bahwa tidak ada ilah yang berhak disembah selain Allah semata, dan Muhammad adalah hamba dan Rasul-Nya.",
+                riwayat: "HR. Muslim no. 234"
+            },
+            {
+                no: 5,
+                judul: "Dzikir Ketika Keluar Rumah",
+                arab: "بِسْمِ اللهِ ، تَوَكَّلْتُ عَلَى اللهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ",
+                latin: "Bismillaahi tawakkaltu 'alallaahi wa laa haula wa laa quwwata illaa billaah.",
+                arti: "Dengan menyebut nama Allah, aku bertawakal kepada Allah, tiada daya dan kekuatan kecuali dengan pertolongan Allah.",
+                riwayat: "HR. Abu Dawud no. 5095"
+            },
+            {
+                no: 6,
+                judul: "Doa Masuk Masjid",
+                arab: "أَعُوذُ بِاللهِ العَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّحِيمِ. اَللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+                latin: "A'uudzu billaahil 'azhiim, wa biwajhihil kariim, wa sulthaanihil qadiim, minasysyaithaanir rajiim. Allaahummaftah lii abwaaba rahmatik.",
+                arti: "Aku berlindung kepada Allah Yang Maha Agung, dengan wajah-Nya Yang Mulia, dari setan terkutuk. Ya Allah, bukakanlah pintu rahmat-Mu.",
+                riwayat: "HR. Muslim no. 713"
+            },
+            {
+                no: 7,
+                judul: "Doa Istiftah Dalam Sholat",
+                arab: "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ، اللَّهُمَّ نَقْنِي مِنْ خَطَايَايَ كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ",
+                latin: "Allaahumma baa'id bainii wa baina khathaayaaya kamaa baa'adta bainal masyriqi wal maghrib...",
+                arti: "Ya Allah, jauhkanlah antara aku dan kesalahan-kesalahanku sebagaimana Engkau menjauhkan antara timur dan barat...",
+                riwayat: "HR. Al-Bukhori no. 744 & Muslim no. 598"
+            },
+            {
+                no: 8,
+                judul: "Dzikir Setelah Salam Sholat Fardhu",
+                arab: "أَسْتَغْفِرُ اللهَ (٣×) اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+                latin: "Astaghfirullaah (3x). Allaahumma antas-salaam wa minkas-salaam tabaarakta yaa dzal jalaali wal ikraam.",
+                arti: "Aku memohon ampun kepada Allah (3x). Ya Allah Engkaulah Maha Sejahtera, dari-Mu keselamatan. Maha Suci Engkau wahai Yang Memiliki Keagungan.",
+                riwayat: "HR. Muslim no. 591"
+            },
+            {
+                no: 9,
+                judul: "Sayyidul Istighfar (Dzikir Pagi & Petang)",
+                arab: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ...",
+                latin: "Allaahumma anta rabbii laa ilaaha illaa anta, khalaqtanii wa ana 'abduka...",
+                arti: "Ya Allah, Engkau adalah Rabbku, tidak ada ilah selain Engkau. Engkau telah menciptakanku dan aku adalah hamba-Mu...",
+                riwayat: "HR. Al-Bukhori no. 6306"
+            },
+            {
+                no: 10,
+                judul: "Dzikir Perlindungan Diri (3x Pagi & Petang)",
+                arab: "بِسْمِ اللهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+                latin: "Bismillaahilladzii laa yadhurru ma'asmihi syai'un fil ardhi wa laa fis-samaa'i wa huwas-samii'ul 'aliim.",
+                arti: "Dengan nama Allah, yang dengan nama-Nya tidak ada sesuatu pun di bumi maupun di langit yang dapat membahayakan.",
+                riwayat: "HR. Abu Dawud no. 5088"
+            }
+        ];
 
+        function renderMateriHisnulMuslim() {
             const container = document.getElementById('daftarMateriDoa');
-            container.innerHTML = doas.map(d => `
-                <div class="border p-4 rounded-xl bg-slate-50 hover:border-emerald-300 transition">
-                    <h4 class="font-bold text-emerald-700 text-md mb-2"><i class="fa-solid fa-hands-praying mr-2"></i>${d.judul}</h4>
-                    <p class="text-slate-800 text-sm font-semibold mb-1">${d.arab}</p>
-                    <p class="text-slate-500 text-xs italic">"${d.arti}"</p>
+            container.innerHTML = hisnulMuslimData.map(item => `
+                <div class="card-materi border border-emerald-100 rounded-2xl bg-gradient-to-br from-white to-emerald-50/30 p-5 shadow-sm hover:shadow-md transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Dzikir #${item.no}</span>
+                        <span class="text-[10px] text-slate-400 font-semibold">${item.riwayat}</span>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-base mb-3">${item.judul}</h4>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 mb-3 text-right">
+                        <p class="font-arabic text-xl text-emerald-900 font-bold">${item.arab}</p>
+                    </div>
+                    <p class="text-xs font-semibold text-emerald-700 italic mb-1">${item.latin}</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">"${item.arti}"</p>
                 </div>
             `).join('');
+        }
+
+        function filterMateriDoa() {
+            const query = document.getElementById('cariMateri').value.toLowerCase();
+            const cards = document.querySelectorAll('.card-materi');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
         }
 
         // --- SEKSI 5: DAFTAR SANTRI (CRUD) ---
@@ -583,10 +726,7 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`;
             const index = document.getElementById('editIndex').value;
             const dataBaru = {
                 nama: document.getElementById('inputNama').value,
-                hpOrtu: document.getElementById('inputHpOrtu').value,
-                tilawah: index !== '' ? listSantri[index].tilawah : '-',
-                hafalan: index !== '' ? listSantri[index].hafalan : '-',
-                ketPerkembangan: index !== '' ? listSantri[index].ketPerkembangan : '-'
+                hpOrtu: document.getElementById('inputHpOrtu').value
             };
 
             if(index === '') {

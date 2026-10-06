@@ -1,1 +1,470 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumah Quran Khairul Hufaz</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .active-tab {
+            border-bottom: 3px solid #059669;
+            color: #059669;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header & Login Status -->
+    <header class="bg-emerald-700 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-[#10b981] fa-book-quran text-3xl"></i>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold">RQA Khairul Hufaz</h1>
+                    <p class="text-xs text-emerald-100">rqakhairulhufaz.com</p>
+                </div>
+            </div>
+            <div id="userInfo" class="hidden flex items-center space-x-3">
+                <span id="userEmail" class="text-sm bg-emerald-800 px-3 py-1 rounded-full text-emerald-100"></span>
+                <button onclick="logout()" class="text-xs bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded font-medium transition">
+                    <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Halaman Login -->
+    <div id="loginScreen" class="flex-grow flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full border border-slate-100">
+            <div class="text-center mb-6">
+                <i class="fa-solid fa-house-chimney-window text-5xl text-emerald-600 mb-3"></i>
+                <h2 class="text-2xl font-bold text-slate-800">Selamat Datang</h2>
+                <p class="text-sm text-slate-500">Masuk ke Sistem Pengelolaan RQA Khairul Hufaz</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Email Pengajar / Admin</label>
+                    <input type="email" id="loginEmail" required placeholder="admin@rqakhairulhufaz.com" 
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Kata Sandi</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••" 
+                           class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-lg shadow transition">
+                    Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Halaman Utama Aplikasi (Dashboard) -->
+    <main id="appScreen" class="hidden flex-grow max-w-6xl w-full mx-auto px-4 py-6">
+
+        <!-- Banner Selamat Datang -->
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 rounded-2xl shadow-md mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold mb-2">Selamat datang di Rumah Quran Khairul Hufaz</h2>
+            <p class="text-emerald-100 text-sm md:text-base">Sistem Pengelolaan Absensi, Perkembangan Santri, dan Materi Pembelajaran.</p>
+        </div>
+
+        <!-- Menu Ikon Navigasi (Tab Utama) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <button onclick="switchTab('absensi')" id="tab-absensi" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+                <i class="fa-solid fa-clipboard-user text-3xl text-emerald-600 mb-2"></i>
+                <span class="font-semibold text-slate-700">Absensi</span>
+            </button>
+            <button onclick="switchTab('perkembangan')" id="tab-perkembangan" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+                <i class="fa-solid fa-chart-line text-3xl text-teal-600 mb-2"></i>
+                <span class="font-semibold text-slate-700">Perkembangan</span>
+            </button>
+            <button onclick="switchTab('materi')" id="tab-materi" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+                <i class="fa-solid fa-book-open text-3xl text-amber-600 mb-2"></i>
+                <span class="font-semibold text-slate-700">Materi Belajar</span>
+            </button>
+            <button onclick="switchTab('santri')" id="tab-santri" class="p-4 bg-white rounded-xl shadow-sm border hover:shadow-md transition text-center flex flex-col items-center justify-center">
+                <i class="fa-solid fa-address-book text-3xl text-blue-600 mb-2"></i>
+                <span class="font-semibold text-slate-700">Daftar Santri</span>
+            </button>
+        </div>
+
+        <!-- SEKSI 1: ABSENSI -->
+        <section id="content-absensi" class="tab-content bg-white p-6 rounded-2xl shadow-sm border mb-6">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800">Absensi Kehadiran Santri</h3>
+                    <p class="text-sm text-slate-500" id="tanggalHariIni"></p>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 text-sm">
+                            <th class="p-3 rounded-l-lg">Nama Lengkap</th>
+                            <th class="p-3">Status Kehadiran</th>
+                            <th class="p-3 rounded-r-lg">Keterangan Catatan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelAbsensi" class="divide-y divide-slate-100 text-sm">
+                        <!-- Data Absensi diisi lewat JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEKSI 2: PERKEMBANGAN SANTRI -->
+        <section id="content-perkembangan" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6">
+            <h3 class="text-lg font-bold text-slate-800 mb-4">Catatan Perkembangan Santri</h3>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-slate-700 mb-2">Pilih Nama Santri:</label>
+                <select id="selectSantriPerkembangan" onchange="loadPerkembanganSantri()" class="w-full md:w-1/2 p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                    <!-- Option diisi JS -->
+                </select>
+            </div>
+            <div id="detailPerkembangan" class="bg-slate-50 p-6 rounded-xl border space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-1"><i class="fa-solid fa-book-bookmark text-emerald-600 mr-2"></i>Tilawah</label>
+                    <textarea id="inputTilawah" rows="2" class="w-full p-2 border rounded-lg text-sm" placeholder="Contoh: QS. Al-Baqarah ayat 1-15 (Lancar)"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-1"><i class="fa-solid fa-brain text-teal-600 mr-2"></i>Hafalan</label>
+                    <textarea id="inputHafalan" rows="2" class="w-full p-2 border rounded-lg text-sm" placeholder="Contoh: Surah An-Naba' (Muroja'ah)"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-1"><i class="fa-solid fa-pen-note text-amber-600 mr-2"></i>Keterangan Tambahan</label>
+                    <textarea id="inputKeteranganPerkembangan" rows="2" class="w-full p-2 border rounded-lg text-sm" placeholder="Contoh: Makhroj hurufkho masih perlu diperbaiki."></textarea>
+                </div>
+                <button onclick="simpanPerkembangan()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition">
+                    Simpan Perubahan
+                </button>
+            </div>
+        </section>
+
+        <!-- SEKSI 3: MATERI BELAJAR -->
+        <section id="content-materi" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6">
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Materi Belajar (Doa Harian Hisnul Muslim)</h3>
+            <p class="text-sm text-slate-500 mb-6">Kumpulan doa-doa pilihan untuk hafalan dan amalan harian santri.</p>
+            <div class="grid md:grid-cols-2 gap-4" id="daftarMateriDoa">
+                <!-- Data Doa diisi lewat JS -->
+            </div>
+        </section>
+
+        <!-- SEKSI 4: DAFTAR SANTRI -->
+        <section id="content-santri" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-800">Daftar Data Santri</h3>
+                    <p class="text-sm text-slate-500">Kelola informasi nama, kelas, kontak orang tua, dan target santri.</p>
+                </div>
+                <button onclick="bukaModalSantri()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Tambah Santri Baru</span>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 text-sm">
+                            <th class="p-3 rounded-l-lg">Nama Lengkap</th>
+                            <th class="p-3">Kelas</th>
+                            <th class="p-3">No. HP Orang Tua</th>
+                            <th class="p-3">Target Orang Tua & Sekolah</th>
+                            <th class="p-3 rounded-r-lg text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelDataSantri" class="divide-y divide-slate-100 text-sm">
+                        <!-- Data Santri diisi JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Tambah/Edit Santri -->
+    <div id="modalSantri" class="fixed inset-0 bg-slate-900/50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 id="modalTitle" class="text-lg font-bold text-slate-800">Tambah Santri Baru</h3>
+                <button onclick="tutupModalSantri()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form onsubmit="simpanDataSantri(event)" class="space-y-3">
+                <input type="hidden" id="editIndex">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Lengkap</label>
+                    <input type="text" id="inputNama" required class="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas</label>
+                    <input type="text" id="inputKelas" required placeholder="Contoh: Tahfizh 1" class="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">No. HP Orang Tua</label>
+                    <input type="tel" id="inputHpOrtu" required placeholder="08123456789" class="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Target Orang Tua & Sekolah</label>
+                    <textarea id="inputTarget" rows="3" placeholder="Target: Hafal Juz 30 dalam 6 bulan" class="w-full p-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500"></textarea>
+                </div>
+                <div class="flex justify-end space-x-2 pt-3">
+                    <button type="button" onclick="tutupModalSantri()" class="px-4 py-2 border rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Aplikasi -->
+    <script>
+        // Data Awal Santri dari Permintaan
+        const initialSantri = [
+            "Muhammad Al Fatih Abdurrahman", "Ibrahim Salman Abdurrasyid", 
+            "Muhammad Azka Khairizza Zein", "Abiyan Nandana Maulidan", 
+            "Kharisa Nada Shidqia", "Ainara Adeeva Hanania", 
+            "DEANDRA", "Khayla Quenna Anindita", 
+            "Almeera Khaliqa Dzahin Susman", "NADIYA", 
+            "Thoriq Adiningrat", "Ershal Abian Sahbaz", 
+            "Khattar Attalah Hamizan", "Nabhan Aarav Hartarto", 
+            "Aafiq Hasan Abdul Jabar", "ABDULLAH KHAIRUL HUFFADZ"
+        ];
+
+        // Memuat Data dari LocalStorage atau default
+        let listSantri = JSON.parse(localStorage.getItem('rqa_santri')) || initialSantri.map(nama => ({
+            nama: nama,
+            kelas: "Reguler",
+            hpOrtu: "-",
+            target: "Lancar membaca Al-Quran & Hafalan Doa Harian",
+            tilawah: "",
+            hafalan: "",
+            ketPerkembangan: ""
+        }));
+
+        let dataAbsensi = JSON.parse(localStorage.getItem('rqa_absensi')) || {};
+
+        // Inisialisasi awal
+        window.onload = function() {
+            document.getElementById('tanggalHariIni').innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            renderTabelAbsensi();
+            renderTabelDataSantri();
+            initSelectPerkembangan();
+            renderMateriDoa();
+            
+            // Cek Sesi Login
+            const loggedInUser = localStorage.getItem('rqa_user');
+            if(loggedInUser) {
+                showApp(loggedInUser);
+            }
+        };
+
+        // Fungsi Login & Logout
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            localStorage.setItem('rqa_user', email);
+            showApp(email);
+        }
+
+        function showApp(email) {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('appScreen').classList.remove('hidden');
+            document.getElementById('userInfo').classList.remove('hidden');
+            document.getElementById('userEmail').innerText = email;
+            switchTab('absensi');
+        }
+
+        function logout() {
+            localStorage.removeItem('rqa_user');
+            document.getElementById('appScreen').classList.add('hidden');
+            document.getElementById('userInfo').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+        }
+
+        // Navigasi Tab
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+        }
+
+        // --- SEKSI 1: ABSENSI ---
+        function renderTabelAbsensi() {
+            const tbody = document.getElementById('tabelAbsensi');
+            tbody.innerHTML = '';
+            listSantri.forEach((santri, index) => {
+                const status = dataAbsensi[index]?.status || '';
+                const ket = dataAbsensi[index]?.ket || '';
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-medium text-slate-800">${santri.nama}</td>
+                        <td class="p-3">
+                            <div class="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-1 space-x-1">
+                                ${['Hadir', 'Izin', 'Sakit', 'Alfa'].map(st => `
+                                    <button onclick="setAbsen(${index}, '${st}')" 
+                                        class="px-2.5 py-1 text-xs font-semibold rounded-md transition ${status === st ? getBadgeClass(st) : 'text-slate-600 hover:bg-slate-200'}">
+                                        ${st}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </td>
+                        <td class="p-3">
+                            <input type="text" value="${ket}" onchange="setKetAbsen(${index}, this.value)" placeholder="Keterangan singkat..." class="w-full p-1.5 border rounded text-xs">
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function getBadgeClass(st) {
+            if(st === 'Hadir') return 'bg-emerald-600 text-white';
+            if(st === 'Izin') return 'bg-amber-500 text-white';
+            if(st === 'Sakit') return 'bg-blue-500 text-white';
+            if(st === 'Alfa') return 'bg-red-600 text-white';
+        }
+
+        function setAbsen(index, status) {
+            if(!dataAbsensi[index]) dataAbsensi[index] = {};
+            dataAbsensi[index].status = status;
+            localStorage.setItem('rqa_absensi', JSON.stringify(dataAbsensi));
+            renderTabelAbsensi();
+        }
+
+        function setKetAbsen(index, ket) {
+            if(!dataAbsensi[index]) dataAbsensi[index] = {};
+            dataAbsensi[index].ket = ket;
+            localStorage.setItem('rqa_absensi', JSON.stringify(dataAbsensi));
+        }
+
+        // --- SEKSI 2: PERKEMBANGAN SANTRI ---
+        function initSelectPerkembangan() {
+            const select = document.getElementById('selectSantriPerkembangan');
+            select.innerHTML = listSantri.map((s, idx) => `<option value="${idx}">${s.nama}</option>`).join('');
+            loadPerkembanganSantri();
+        }
+
+        function loadPerkembanganSantri() {
+            const idx = document.getElementById('selectSantriPerkembangan').value;
+            const santri = listSantri[idx];
+            if(santri) {
+                document.getElementById('inputTilawah').value = santri.tilawah || '';
+                document.getElementById('inputHafalan').value = santri.hafalan || '';
+                document.getElementById('inputKeteranganPerkembangan').value = santri.ketPerkembangan || '';
+            }
+        }
+
+        function simpanPerkembangan() {
+            const idx = document.getElementById('selectSantriPerkembangan').value;
+            listSantri[idx].tilawah = document.getElementById('inputTilawah').value;
+            listSantri[idx].hafalan = document.getElementById('inputHafalan').value;
+            listSantri[idx].ketPerkembangan = document.getElementById('inputKeteranganPerkembangan').value;
+            
+            localStorage.setItem('rqa_santri', JSON.stringify(listSantri));
+            alert('Catatan perkembangan ' + listSantri[idx].nama + ' berhasil disimpan!');
+        }
+
+        // --- SEKSI 3: MATERI BELAJAR ---
+        function renderMateriDoa() {
+            const doas = [
+                { judul: "Doa Sebelum Tidur", arab: "Bismika allaahumma amuutu wa ahyaa.", arti: "Dengan nama-Mu ya Allah, aku mati dan aku hidup." },
+                { judul: "Doa Bangun Tidur", arab: "Alhamdu lillaahilladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur.", arti: "Segala puji bagi Allah yang menghidupkan kami setelah mematikan kami, dan kepada-Nya kami dibangkitkan." },
+                { judul: "Doa Sebelum Makan", arab: "Bismillaah.", arti: "Dengan nama Allah." },
+                { judul: "Doa Masuk Masjid", arab: "Allaahummafftah lii abwaaba rahmatik.", arti: "Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu." }
+            ];
+
+            const container = document.getElementById('daftarMateriDoa');
+            container.innerHTML = doas.map(d => `
+                <div class="border p-4 rounded-xl bg-slate-50 hover:border-emerald-300 transition">
+                    <h4 class="font-bold text-emerald-700 text-md mb-2"><i class="fa-solid fa-hands-praying mr-2"></i>${d.judul}</h4>
+                    <p class="text-slate-800 text-sm font-semibold mb-1">${d.arab}</p>
+                    <p class="text-slate-500 text-xs italic">"${d.arti}"</p>
+                </div>
+            `).join('');
+        }
+
+        // --- SEKSI 4: DAFTAR SANTRI (CRUD) ---
+        function renderTabelDataSantri() {
+            const tbody = document.getElementById('tabelDataSantri');
+            tbody.innerHTML = '';
+            listSantri.forEach((santri, index) => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-medium text-slate-800">${santri.nama}</td>
+                        <td class="p-3 text-slate-600">${santri.kelas}</td>
+                        <td class="p-3 text-slate-600">${santri.hpOrtu}</td>
+                        <td class="p-3 text-slate-600">${santri.target}</td>
+                        <td class="p-3 text-center space-x-2">
+                            <button onclick="editSantri(${index})" class="text-amber-600 hover:text-amber-800"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="hapusSantri(${index})" class="text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function bukaModalSantri() {
+            document.getElementById('editIndex').value = '';
+            document.getElementById('modalTitle').innerText = 'Tambah Santri Baru';
+            document.getElementById('inputNama').value = '';
+            document.getElementById('inputKelas').value = '';
+            document.getElementById('inputHpOrtu').value = '';
+            document.getElementById('inputTarget').value = '';
+            document.getElementById('modalSantri').classList.remove('hidden');
+        }
+
+        function tutupModalSantri() {
+            document.getElementById('modalSantri').classList.add('hidden');
+        }
+
+        function editSantri(index) {
+            const santri = listSantri[index];
+            document.getElementById('editIndex').value = index;
+            document.getElementById('modalTitle').innerText = 'Edit Data Santri';
+            document.getElementById('inputNama').value = santri.nama;
+            document.getElementById('inputKelas').value = santri.kelas;
+            document.getElementById('inputHpOrtu').value = santri.hpOrtu;
+            document.getElementById('inputTarget').value = santri.target;
+            document.getElementById('modalSantri').classList.remove('hidden');
+        }
+
+        function simpanDataSantri(e) {
+            e.preventDefault();
+            const index = document.getElementById('editIndex').value;
+            const dataBaru = {
+                nama: document.getElementById('inputNama').value,
+                kelas: document.getElementById('inputKelas').value,
+                hpOrtu: document.getElementById('inputHpOrtu').value,
+                target: document.getElementById('inputTarget').value,
+                tilawah: index !== '' ? listSantri[index].tilawah : '',
+                hafalan: index !== '' ? listSantri[index].hafalan : '',
+                ketPerkembangan: index !== '' ? listSantri[index].ketPerkembangan : ''
+            };
+
+            if(index === '') {
+                listSantri.push(dataBaru);
+            } else {
+                listSantri[index] = dataBaru;
+            }
+
+            localStorage.setItem('rqa_santri', JSON.stringify(listSantri));
+            renderTabelDataSantri();
+            renderTabelAbsensi();
+            initSelectPerkembangan();
+            tutupModalSantri();
+        }
+
+        function hapusSantri(index) {
+            if(confirm('Apakah Anda yakin ingin menghapus ' + listSantri[index].nama + '?')) {
+                listSantri.splice(index, 1);
+                localStorage.setItem('rqa_santri', JSON.stringify(listSantri));
+                renderTabelDataSantri();
+                renderTabelAbsensi();
+                initSelectPerkembangan();
+            }
+        }
+    </script>
+</body>
+</html>

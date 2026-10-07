@@ -99,7 +99,7 @@
             </button>
         </div>
 
-        <!-- SEKSI 1: ABSENSI DENGAN FITUR PILIH TANGGAL -->
+        <!-- SEKSI 1: ABSENSI -->
         <section id="content-absensi" class="tab-content bg-white p-6 rounded-2xl shadow-sm border mb-6 no-print">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b pb-4">
                 <div>
@@ -122,13 +122,19 @@
                         </tr>
                     </thead>
                     <tbody id="tabelAbsensi" class="divide-y divide-slate-100 text-sm">
-                        <!-- Data Absensi diisi lewat JS -->
+                        <!-- Data Absensi -->
                     </tbody>
                 </table>
             </div>
+            <div class="mt-4 flex justify-end">
+                <button onclick="simpanAbsensiKeSheets()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition shadow-sm flex items-center space-x-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Simpan Absensi ke Google Sheets</span>
+                </button>
+            </div>
         </section>
 
-        <!-- SEKSI 2: PERKEMBANGAN SANTRI DENGAN FITUR PILIH TANGGAL -->
+        <!-- SEKSI 2: PERKEMBANGAN SANTRI -->
         <section id="content-perkembangan" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6 no-print">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b pb-4">
                 <div>
@@ -145,7 +151,7 @@
             <div class="mb-6">
                 <label class="block text-sm font-medium text-slate-700 mb-2">Pilih Nama Santri:</label>
                 <select id="selectSantriPerkembangan" onchange="loadPerkembanganSantri()" class="w-full md:w-1/2 p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500">
-                    <!-- Option diisi JS -->
+                    <!-- Option JS -->
                 </select>
             </div>
             <div id="detailPerkembangan" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
@@ -161,13 +167,14 @@
                     <label class="block text-sm font-bold text-slate-700 mb-1"><i class="fa-solid fa-pen-nib text-amber-600 mr-2"></i>Catatan / Evaluasi Pengajar</label>
                     <textarea id="inputKeteranganPerkembangan" rows="2" class="w-full p-2.5 border rounded-xl text-sm" placeholder="Contoh: Alhamdulillah lebih baik / Kelancaran hafalan meningkat."></textarea>
                 </div>
-                <button onclick="simpanPerkembangan()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition shadow-sm">
-                    Simpan Capaian Tanggal Ini
+                <button onclick="simpanPerkembangan()" class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition shadow-sm flex items-center space-x-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Simpan Capaian ke Google Sheets</span>
                 </button>
             </div>
         </section>
 
-        <!-- SEKSI 3: REKAP LAPORAN PEKANAN/PERIODE KE ORANG TUA -->
+        <!-- SEKSI 3: REKAP LAPORAN -->
         <section id="content-laporan" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6">
             <h3 class="text-lg font-bold text-slate-800 mb-2 no-print">Rekap & Pelaporan Pencapaian Santri</h3>
             <p class="text-sm text-slate-500 mb-6 no-print">Pilih nama santri dan tentukan rentang tanggal untuk membuat laporan hasil belajar.</p>
@@ -176,7 +183,6 @@
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Pilih Santri:</label>
                     <select id="selectSantriLaporan" onchange="generatePratinjauLaporan()" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500">
-                        <!-- Option diisi JS -->
                     </select>
                 </div>
                 <div>
@@ -189,7 +195,6 @@
                 </div>
             </div>
 
-            <!-- Pratinjau Tampilan Cetak Rapot -->
             <div id="areaCetakLaporan" class="border p-6 rounded-2xl bg-white shadow-sm">
                 <div class="border-b-2 border-emerald-800 pb-4 mb-4 text-center">
                     <h2 class="text-2xl font-bold text-emerald-800 uppercase tracking-wide">Rumah Quran Khairul Hufaz</h2>
@@ -234,7 +239,6 @@
                 </div>
             </div>
 
-            <!-- Tombol Aksi (WA & Cetak) -->
             <div class="mt-6 flex flex-wrap gap-3 no-print">
                 <button onclick="kirimLaporanWA()" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm flex items-center space-x-2 shadow-sm transition">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
@@ -247,7 +251,7 @@
             </div>
         </section>
 
-        <!-- SEKSI 4: MATERI BELAJAR ELEGAN (HISNUL MUSLIM) -->
+        <!-- SEKSI 4: MATERI HISNUL MUSLIM -->
         <section id="content-materi" class="tab-content hidden bg-white p-6 rounded-2xl shadow-sm border mb-6 no-print">
             <div class="border-b pb-4 mb-6">
                 <h3 class="text-xl font-bold text-emerald-800 flex items-center">
@@ -256,15 +260,10 @@
                 </h3>
                 <p class="text-xs text-slate-500 mt-1">Kumpulan dzikir harian shahih karya Dr. Sa'id bin Wahf Al-Qohthoni untuk hafalan & amalan santri.</p>
             </div>
-
-            <!-- Cari Doa -->
             <div class="mb-6">
                 <input type="text" id="cariMateri" onkeyup="filterMateriDoa()" placeholder="🔍 Cari judul doa atau dzikir..." class="w-full md:w-1/2 p-3 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
             </div>
-
-            <!-- Container Kartu Doa Elegan -->
             <div class="grid md:grid-cols-2 gap-6" id="daftarMateriDoa">
-                <!-- Data Doa Hisnul Muslim diisi lewat JS -->
             </div>
         </section>
 
@@ -291,7 +290,6 @@
                         </tr>
                     </thead>
                     <tbody id="tabelDataSantri" class="divide-y divide-slate-100 text-sm">
-                        <!-- Data Santri diisi JS -->
                     </tbody>
                 </table>
             </div>
@@ -299,7 +297,7 @@
 
     </main>
 
-    <!-- Modal Tambah/Edit Santri -->
+    <!-- Modal Santri -->
     <div id="modalSantri" class="fixed inset-0 bg-slate-900/50 hidden flex items-center justify-center p-4 z-50 no-print">
         <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
@@ -324,8 +322,11 @@
         </div>
     </div>
 
-    <!-- JavaScript Aplikasi -->
+    <!-- JavaScript -->
     <script>
+        // MASUKKAN URL APPS SCRIPT KAMU DI SINI
+        const GOOGLE_SCRIPT_URL = "ISI_URL_WEB_APP_GOOGLE_SCRIPT_DI_SINI";
+
         const initialSantri = [
             "Muhammad Al Fatih Abdurrahman", "Ibrahim Salman Abdurrasyid", 
             "Muhammad Azka Khairizza Zein", "Abiyan Nandana Maulidan", 
@@ -337,14 +338,8 @@
             "Aafiq Hasan Abdul Jabar", "ABDULLAH KHAIRUL HUFFADZ"
         ];
 
-        let listSantri = JSON.parse(localStorage.getItem('rqa_santri')) || initialSantri.map(nama => ({
-            nama: nama,
-            hpOrtu: ""
-        }));
-
-        // Struktur data berbasis tanggal: { "2026-10-07": { indexSantri: { status: 'Hadir', ket: '' } } }
+        let listSantri = JSON.parse(localStorage.getItem('rqa_santri')) || initialSantri.map(nama => ({ nama: nama, hpOrtu: "" }));
         let dbAbsensi = JSON.parse(localStorage.getItem('rqa_db_absensi')) || {};
-        // Struktur data capaian: { "2026-10-07": { indexSantri: { tilawah: '', hafalan: '', ket: '' } } }
         let dbPerkembangan = JSON.parse(localStorage.getItem('rqa_db_perkembangan')) || {};
 
         window.onload = function() {
@@ -359,10 +354,27 @@
             renderMateriHisnulMuslim();
             
             const loggedInUser = localStorage.getItem('rqa_user');
-            if(loggedInUser) {
-                showApp(loggedInUser);
-            }
+            if(loggedInUser) showApp(loggedInUser);
         };
+
+        function kirimKeGoogleSheets(payload) {
+            if(GOOGLE_SCRIPT_URL === "ISI_URL_WEB_APP_GOOGLE_SCRIPT_DI_SINI") {
+                alert("Peringatan: URL Apps Script Google Sheets belum dimasukkan ke kode!");
+                return;
+            }
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert("Data berhasil tersimpan ke Google Sheets!");
+            }).catch(err => {
+                console.error(err);
+                alert("Gagal mengirim data ke Google Sheets.");
+            });
+        }
 
         function handleLogin(e) {
             e.preventDefault();
@@ -389,12 +401,10 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('content-' + tabName).classList.remove('hidden');
-            if(tabName === 'laporan') {
-                generatePratinjauLaporan();
-            }
+            if(tabName === 'laporan') generatePratinjauLaporan();
         }
 
-        // --- SEKSI 1: ABSENSI BERBASIS TANGGAL ---
+        // --- ABSENSI ---
         function renderTabelAbsensi() {
             const tgl = document.getElementById('pilihTglAbsensi').value;
             const dataHariIni = dbAbsensi[tgl] || {};
@@ -449,7 +459,24 @@
             localStorage.setItem('rqa_db_absensi', JSON.stringify(dbAbsensi));
         }
 
-        // --- SEKSI 2: PERKEMBANGAN SANTRI BERBASIS TANGGAL ---
+        function simpanAbsensiKeSheets() {
+            const tgl = document.getElementById('pilihTglAbsensi').value;
+            const dataHariIni = dbAbsensi[tgl] || {};
+
+            let items = listSantri.map((santri, index) => ({
+                nama: santri.nama,
+                status: dataHariIni[index]?.status || 'Belum Absen',
+                keterangan: dataHariIni[index]?.ket || ''
+            }));
+
+            kirimKeGoogleSheets({
+                action: "simpanAbsensi",
+                tanggal: tgl,
+                items: items
+            });
+        }
+
+        // --- CAPAIAN ---
         function initSelectPerkembangan() {
             const select = document.getElementById('selectSantriPerkembangan');
             select.innerHTML = listSantri.map((s, idx) => `<option value="${idx}">${s.nama}</option>`).join('');
@@ -469,19 +496,26 @@
         function simpanPerkembangan() {
             const tgl = document.getElementById('pilihTglPerkembangan').value;
             const idx = document.getElementById('selectSantriPerkembangan').value;
+            const namaSantri = listSantri[idx].nama;
+            const tilawah = document.getElementById('inputTilawah').value;
+            const hafalan = document.getElementById('inputHafalan').value;
+            const ket = document.getElementById('inputKeteranganPerkembangan').value;
 
             if(!dbPerkembangan[tgl]) dbPerkembangan[tgl] = {};
-            dbPerkembangan[tgl][idx] = {
-                tilawah: document.getElementById('inputTilawah').value,
-                hafalan: document.getElementById('inputHafalan').value,
-                ket: document.getElementById('inputKeteranganPerkembangan').value
-            };
-
+            dbPerkembangan[tgl][idx] = { tilawah: tilawah, hafalan: hafalan, ket: ket };
             localStorage.setItem('rqa_db_perkembangan', JSON.stringify(dbPerkembangan));
-            alert('Capaian belajar ' + listSantri[idx].nama + ' untuk tanggal ' + tgl + ' berhasil disimpan!');
+
+            kirimKeGoogleSheets({
+                action: "simpanCapaian",
+                tanggal: tgl,
+                nama: namaSantri,
+                tilawah: tilawah,
+                hafalan: hafalan,
+                keterangan: ket
+            });
         }
 
-        // --- SEKSI 3: REKAP LAPORAN PEKANAN ---
+        // --- REKAP & HISNUL MUSLIM ---
         function initSelectLaporan() {
             const select = document.getElementById('selectSantriLaporan');
             select.innerHTML = listSantri.map((s, idx) => `<option value="${idx}">${s.nama}</option>`).join('');
@@ -494,9 +528,7 @@
 
             const tglAwal = document.getElementById('inputTglAwal').value || '1';
             const tglAkhir = document.getElementById('inputTglAkhir').value || '7';
-            const periodeText = `Tanggal ${tglAwal} - ${tglAkhir}`;
 
-            // Ambil data terbaru dari dbPerkembangan
             let tilawahTerakhir = "-", hafalanTerakhir = "-", ketTerakhir = "-";
             const keysTgl = Object.keys(dbPerkembangan).sort();
             if(keysTgl.length > 0) {
@@ -509,7 +541,7 @@
                 }
             }
 
-            document.getElementById('lapPeriodeText').innerText = 'Periode: ' + periodeText;
+            document.getElementById('lapPeriodeText').innerText = `Periode: Tanggal ${tglAwal} - ${tglAkhir}`;
             document.getElementById('lapNama').innerText = santri.nama;
             document.getElementById('lapHpOrtu').innerText = santri.hpOrtu || '-';
             document.getElementById('lapAbsen').innerText = 'Hadir Lengkap';
@@ -521,21 +553,16 @@
         function kirimLaporanWA() {
             const idx = document.getElementById('selectSantriLaporan').value;
             const santri = listSantri[idx];
-            if(!santri) return;
-
-            if(!santri.hpOrtu || santri.hpOrtu === '-' || santri.hpOrtu.length < 5) {
-                alert('Nomor HP Orang Tua belum diisi! Silakan lengkapi nomor HP di menu "Daftar Santri".');
+            if(!santri || !santri.hpOrtu || santri.hpOrtu.length < 5) {
+                alert('Nomor HP Orang Tua belum diisi!');
                 return;
             }
 
             let phone = santri.hpOrtu.replace(/[^0-9]/g, '');
-            if(phone.startsWith('0')) {
-                phone = '62' + phone.slice(1);
-            }
+            if(phone.startsWith('0')) phone = '62' + phone.slice(1);
 
             const tglAwal = document.getElementById('inputTglAwal').value || '1';
             const tglAkhir = document.getElementById('inputTglAkhir').value || '7';
-            const periodeText = `Tanggal ${tglAwal}-${tglAkhir}`;
 
             let tilawahTerakhir = "-", hafalanTerakhir = "-", ketTerakhir = "-";
             const keysTgl = Object.keys(dbPerkembangan).sort();
@@ -549,13 +576,12 @@
                 }
             }
 
-            const pesan = 
-`Assalamu'alaikum Warahmatullahi Wabarakatuh.
+            const pesan = `Assalamu'alaikum Warahmatullahi Wabarakatuh.
 
 *LAPORAN HASIL BELAJAR PEKANAN*
 *RUMAH QURAN KHAIRUL HUFAZ*
 ---------------------------------------
-📅 *Periode:* ${periodeText}
+📅 *Periode:* Tanggal ${tglAwal}-${tglAkhir}
 👤 *Nama Santri:* ${santri.nama}
 
 📌 *Kehadiran Pekan Ini:* Hadir Lengkap
@@ -563,102 +589,20 @@
 🧠 *Capaian Hafalan:* ${hafalanTerakhir}
 📝 *Evaluasi Pengajar:* ${ketTerakhir !== '-' ? ketTerakhir : 'Alhamdulillah berjalan lancar.'}
 
-Jazakumullah Khairan atas perhatian dan kerja sama Bapak/Ibu Orang Tua Santri.
+Jazakumullah Khairan atas perhatian dan kerja sama Bapak/Ibu Orang Tua Santri.`;
 
-Wassalamu'alaikum Warahmatullahi Wabarakatuh.`;
-
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(pesan)}`;
-            window.open(url, '_blank');
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
-        // --- SEKSI 4: MATERI HISNUL MUSLIM ---
         const hisnulMuslimData = [
-            {
-                no: 1,
-                judul: "Dzikir Ketika Bangun Tidur",
-                arab: "اَلْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ",
-                latin: "Alhamdu lillaahilladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur.",
-                arti: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami, dan kepada-Nya lah kami akan dibangkitkan.",
-                riwayat: "HR. Al-Bukhori no. 6314 & Muslim no. 2711"
-            },
-            {
-                no: 2,
-                judul: "Doa Memakai Pakaian",
-                arab: "الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هُذَا (الثَّوْبَ) وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ",
-                latin: "Alhamdu lillaahilladzii kasaanii haadzat-tsauba wa razaqaniihi min ghairi haulin minnii wa laa quwwah.",
-                arti: "Segala puji bagi Allah yang telah memberiku pakaian ini dan menganugerahkannya kepadaku tanpa daya dan kekuatan dariku.",
-                riwayat: "HR. Abu Dawud no. 4023"
-            },
-            {
-                no: 3,
-                judul: "Doa Masuk WC",
-                arab: "بِسْمِ اللَّهِ ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
-                latin: "Bismillaah, Allaahumma innii a'uudzu bika minal khubutsi wal khabaa'its.",
-                arti: "Dengan menyebut nama Allah, ya Allah, sesungguhnya aku berlindung kepada-Mu dari setan jantan dan setan betina.",
-                riwayat: "HR. Al-Bukhori no. 142 & Muslim no. 375"
-            },
-            {
-                no: 4,
-                judul: "Dzikir Setelah Selesai Wudhu",
-                arab: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
-                latin: "Asyhadu allaa ilaaha illallaahu wahdahu laa syariika lah, wa asyhadu anna Muhammadan 'abduhu wa rasuuluh.",
-                arti: "Aku bersaksi bahwa tidak ada ilah yang berhak disembah selain Allah semata, dan Muhammad adalah hamba dan Rasul-Nya.",
-                riwayat: "HR. Muslim no. 234"
-            },
-            {
-                no: 5,
-                judul: "Dzikir Ketika Keluar Rumah",
-                arab: "بِسْمِ اللهِ ، تَوَكَّلْتُ عَلَى اللهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ",
-                latin: "Bismillaahi tawakkaltu 'alallaahi wa laa haula wa laa quwwata illaa billaah.",
-                arti: "Dengan menyebut nama Allah, aku bertawakal kepada Allah, tiada daya dan kekuatan kecuali dengan pertolongan Allah.",
-                riwayat: "HR. Abu Dawud no. 5095"
-            },
-            {
-                no: 6,
-                judul: "Doa Masuk Masjid",
-                arab: "أَعُوذُ بِاللهِ العَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّحِيمِ. اَللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
-                latin: "A'uudzu billaahil 'azhiim, wa biwajhihil kariim, wa sulthaanihil qadiim, minasysyaithaanir rajiim. Allaahummaftah lii abwaaba rahmatik.",
-                arti: "Aku berlindung kepada Allah Yang Maha Agung, dengan wajah-Nya Yang Mulia, dari setan terkutuk. Ya Allah, bukakanlah pintu rahmat-Mu.",
-                riwayat: "HR. Muslim no. 713"
-            },
-            {
-                no: 7,
-                judul: "Doa Istiftah Dalam Sholat",
-                arab: "اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ، اللَّهُمَّ نَقْنِي مِنْ خَطَايَايَ كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ",
-                latin: "Allaahumma baa'id bainii wa baina khathaayaaya kamaa baa'adta bainal masyriqi wal maghrib...",
-                arti: "Ya Allah, jauhkanlah antara aku dan kesalahan-kesalahanku sebagaimana Engkau menjauhkan antara timur dan barat...",
-                riwayat: "HR. Al-Bukhori no. 744 & Muslim no. 598"
-            },
-            {
-                no: 8,
-                judul: "Dzikir Setelah Salam Sholat Fardhu",
-                arab: "أَسْتَغْفِرُ اللهَ (٣×) اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
-                latin: "Astaghfirullaah (3x). Allaahumma antas-salaam wa minkas-salaam tabaarakta yaa dzal jalaali wal ikraam.",
-                arti: "Aku memohon ampun kepada Allah (3x). Ya Allah Engkaulah Maha Sejahtera, dari-Mu keselamatan. Maha Suci Engkau wahai Yang Memiliki Keagungan.",
-                riwayat: "HR. Muslim no. 591"
-            },
-            {
-                no: 9,
-                judul: "Sayyidul Istighfar (Dzikir Pagi & Petang)",
-                arab: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ...",
-                latin: "Allaahumma anta rabbii laa ilaaha illaa anta, khalaqtanii wa ana 'abduka...",
-                arti: "Ya Allah, Engkau adalah Rabbku, tidak ada ilah selain Engkau. Engkau telah menciptakanku dan aku adalah hamba-Mu...",
-                riwayat: "HR. Al-Bukhori no. 6306"
-            },
-            {
-                no: 10,
-                judul: "Dzikir Perlindungan Diri (3x Pagi & Petang)",
-                arab: "بِسْمِ اللهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
-                latin: "Bismillaahilladzii laa yadhurru ma'asmihi syai'un fil ardhi wa laa fis-samaa'i wa huwas-samii'ul 'aliim.",
-                arti: "Dengan nama Allah, yang dengan nama-Nya tidak ada sesuatu pun di bumi maupun di langit yang dapat membahayakan.",
-                riwayat: "HR. Abu Dawud no. 5088"
-            }
+            { no: 1, judul: "Dzikir Ketika Bangun Tidur", arab: "اَلْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا، وَإِلَيْهِ النُّشُورُ", latin: "Alhamdu lillaahilladzii ahyaanaa ba'da maa amaatanaa wa ilaihin-nusyuur.", arti: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami...", riwayat: "HR. Al-Bukhori" },
+            { no: 2, judul: "Doa Memakai Pakaian", arab: "الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هُذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ", latin: "Alhamdu lillaahilladzii kasaanii haadzat-tsauba...", arti: "Segala puji bagi Allah yang telah memberiku pakaian ini...", riwayat: "HR. Abu Dawud" },
+            { no: 3, judul: "Doa Masuk WC", arab: "بِسْمِ اللَّهِ ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ", latin: "Bismillaah, Allaahumma innii a'uudzu bika minal khubutsi wal khabaa'its.", arti: "Dengan menyebut nama Allah, ya Allah, aku berlindung kepada-Mu...", riwayat: "HR. Al-Bukhori" }
         ];
 
         function renderMateriHisnulMuslim() {
-            const container = document.getElementById('daftarMateriDoa');
-            container.innerHTML = hisnulMuslimData.map(item => `
-                <div class="card-materi border border-emerald-100 rounded-2xl bg-gradient-to-br from-white to-emerald-50/30 p-5 shadow-sm hover:shadow-md transition">
+            document.getElementById('daftarMateriDoa').innerHTML = hisnulMuslimData.map(item => `
+                <div class="card-materi border border-emerald-100 rounded-2xl bg-gradient-to-br from-white to-emerald-50/30 p-5 shadow-sm">
                     <div class="flex justify-between items-center mb-3">
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Dzikir #${item.no}</span>
                         <span class="text-[10px] text-slate-400 font-semibold">${item.riwayat}</span>
@@ -675,14 +619,12 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`;
 
         function filterMateriDoa() {
             const query = document.getElementById('cariMateri').value.toLowerCase();
-            const cards = document.querySelectorAll('.card-materi');
-            cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(query) ? 'block' : 'none';
+            document.querySelectorAll('.card-materi').forEach(card => {
+                card.style.display = card.innerText.toLowerCase().includes(query) ? 'block' : 'none';
             });
         }
 
-        // --- SEKSI 5: DAFTAR SANTRI (CRUD) ---
+        // --- DAFTAR SANTRI ---
         function renderTabelDataSantri() {
             const tbody = document.getElementById('tabelDataSantri');
             tbody.innerHTML = '';
@@ -729,11 +671,8 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`;
                 hpOrtu: document.getElementById('inputHpOrtu').value
             };
 
-            if(index === '') {
-                listSantri.push(dataBaru);
-            } else {
-                listSantri[index] = dataBaru;
-            }
+            if(index === '') listSantri.push(dataBaru);
+            else listSantri[index] = dataBaru;
 
             localStorage.setItem('rqa_santri', JSON.stringify(listSantri));
             renderTabelDataSantri();
@@ -744,7 +683,7 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`;
         }
 
         function hapusSantri(index) {
-            if(confirm('Apakah Anda yakin ingin menghapus ' + listSantri[index].nama + '?')) {
+            if(confirm('Hapus ' + listSantri[index].nama + '?')) {
                 listSantri.splice(index, 1);
                 localStorage.setItem('rqa_santri', JSON.stringify(listSantri));
                 renderTabelDataSantri();

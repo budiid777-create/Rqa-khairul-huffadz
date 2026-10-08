@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <!-- Halaman Utama Aplikasi (Dashboard) -->
+    <!-- Halaman Utama Aplikasi -->
     <main id="appScreen" class="hidden flex-grow max-w-6xl w-full mx-auto px-4 py-6">
 
         <!-- Banner Selamat Datang -->
@@ -75,7 +75,7 @@
             <p class="text-emerald-100 text-sm md:text-base">Sistem Pengelolaan Absensi, Rekap Perkembangan Santri, dan Materi Dzikir Hisnul Muslim.</p>
         </div>
 
-        <!-- Menu Ikon Navigasi (Tab Utama) -->
+        <!-- Menu Navigasi Tab -->
         <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8 no-print">
             <button onclick="switchTab('absensi')" id="tab-absensi" class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-emerald-500 hover:shadow-md transition text-center flex flex-col items-center justify-center">
                 <i class="fa-solid fa-clipboard-user text-3xl text-emerald-600 mb-2"></i>
@@ -121,9 +121,7 @@
                             <th class="p-3 rounded-r-lg">Keterangan Catatan</th>
                         </tr>
                     </thead>
-                    <tbody id="tabelAbsensi" class="divide-y divide-slate-100 text-sm">
-                        <!-- Data Absensi -->
-                    </tbody>
+                    <tbody id="tabelAbsensi" class="divide-y divide-slate-100 text-sm"></tbody>
                 </table>
             </div>
             <div class="mt-4 flex justify-end">
@@ -150,9 +148,7 @@
 
             <div class="mb-6">
                 <label class="block text-sm font-medium text-slate-700 mb-2">Pilih Nama Santri:</label>
-                <select id="selectSantriPerkembangan" onchange="loadPerkembanganSantri()" class="w-full md:w-1/2 p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500">
-                    <!-- Option JS -->
-                </select>
+                <select id="selectSantriPerkembangan" onchange="loadPerkembanganSantri()" class="w-full md:w-1/2 p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500"></select>
             </div>
             <div id="detailPerkembangan" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
                 <div>
@@ -182,8 +178,7 @@
             <div class="grid md:grid-cols-3 gap-4 mb-6 no-print">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Pilih Santri:</label>
-                    <select id="selectSantriLaporan" onchange="generatePratinjauLaporan()" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500">
-                    </select>
+                    <select id="selectSantriLaporan" onchange="generatePratinjauLaporan()" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-emerald-500"></select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Dari Tanggal:</label>
@@ -263,8 +258,7 @@
             <div class="mb-6">
                 <input type="text" id="cariMateri" onkeyup="filterMateriDoa()" placeholder="🔍 Cari judul doa atau dzikir..." class="w-full md:w-1/2 p-3 border rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
             </div>
-            <div class="grid md:grid-cols-2 gap-6" id="daftarMateriDoa">
-            </div>
+            <div class="grid md:grid-cols-2 gap-6" id="daftarMateriDoa"></div>
         </section>
 
         <!-- SEKSI 5: DAFTAR SANTRI -->
@@ -289,8 +283,7 @@
                             <th class="p-3 rounded-r-lg text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="tabelDataSantri" class="divide-y divide-slate-100 text-sm">
-                    </tbody>
+                    <tbody id="tabelDataSantri" class="divide-y divide-slate-100 text-sm"></tbody>
                 </table>
             </div>
         </section>
@@ -324,7 +317,6 @@
 
     <!-- JavaScript -->
     <script>
-        // MASUKKAN URL APPS SCRIPT KAMU DI SINI
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxL6LYic8gh4CMcVGfmC93bl1zjeF8oIcPe6Xf2k9Qpthsied-U_eU4oV1VWuGKdieR/exec";
 
         const initialSantri = [
@@ -358,11 +350,6 @@
         };
 
         function kirimKeGoogleSheets(payload) {
-            if(GOOGLE_SCRIPT_URL === "ISI_URL_WEB_APP_GOOGLE_SCRIPT_DI_SINI") {
-                alert("Peringatan: URL Apps Script Google Sheets belum dimasukkan ke kode!");
-                return;
-            }
-
             fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors",
@@ -515,7 +502,7 @@
             });
         }
 
-        // --- REKAP & HISNUL MUSLIM ---
+        // --- REKAP LAPORAN & HISNUL MUSLIM ---
         function initSelectLaporan() {
             const select = document.getElementById('selectSantriLaporan');
             select.innerHTML = listSantri.map((s, idx) => `<option value="${idx}">${s.nama}</option>`).join('');
